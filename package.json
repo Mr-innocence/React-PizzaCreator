@@ -4,9 +4,8 @@
     "private": true,
     "scripts": {
         "start:dev": "webpack-dev-server",
-        "clean": "rm -rf ./build",
-        "prebuild": "npm run clean",
-        "build": "webpack --mode production"
+        "build": "webpack --mode production",
+        "start": "live-server src"
     },
     "dependencies": {
         "@babel/core": "^7.8.4",
@@ -24,6 +23,6 @@
         "html-webpack-plugin": "^3.2.0",
         "webpack": "^4.41.5",
         "webpack-cli": "^3.3.10",
-        "webpack-dev-server": "^3.7.1"
+        "webpack-dev-server": "^3.10.3"
     }
 }

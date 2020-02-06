@@ -1,17 +1,32 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const BUILD_DIR = path.resolve(__dirname, 'build/');
+const SOURCE_DIR = path.resolve(__dirname, 'src/');
+
 module.exports = {
-  entry: './src/index.js',
+  entry: `${SOURCE_DIR}/index.jsx`,
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build')
+    path: BUILD_DIR
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test:/\.(png|svg|jpg|gif)$/,
-        use:[
-          'url-loader'
-        ]
+        use:[{
+          loader: 'url-loader',
+          options: {
+            limit: 8192
+          }
+        }]
       },
       {
         test: /\.(jsx|js)$/,
@@ -22,6 +37,10 @@ module.exports = {
           },
         },
       },
-    ]
-  }
+    ]},
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: `${SOURCE_DIR}/index.html`,
+      })
+    ],
 };
