@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-import { HelloWorld } from './components/HellowWorld';
+import ReactDOM from 'react-dom';
+import PizzaCreator from './components/PizzaCreator';
 
-ReactDom.render(
-    <HelloWorld />,
+ReactDOM.render(
+    <PizzaCreator />,
     document.querySelector('#root'),
-)
+);

@@ -1,19 +1,23 @@
 import React from 'react';
+import "./PizzaCreator.css";
+import Title from '../Title';
 
-const PizzaCreator = () => {
-    <div class = "pizza-creator">
-        <div class="details">
-            Enter your details
+const PizzaCreator = () => (
+    <div className = "pizza-creator">
+        <div className="details">
+            <Title>Enter your details</Title>
         </div>
-        <div class="size">
-            Select your size
+        <div className="size">
+            <Title>Select your size</Title>
         </div>
-        <div class="toppings">
-            Choose your toppings
+        <div className="toppings">
+            <Title>Choose your toppings</Title>
         </div>
-        <div class="summary">
-            Summary
+        <div className="summary">
+            <Title>Summary</Title>
         </div>
         <button type="submit">Place order</button>
     </div>
-}
+)
+
+export default PizzaCreator;
