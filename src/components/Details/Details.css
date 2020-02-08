@@ -1,0 +1,26 @@
+.details__container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 1rem;
+}
+.detail > label{
+    text-transform: uppercase;
+    font-size:small;
+    font-weight: bold;
+    color:#6E7790;
+}
+
+.detail__message {
+    font-size: small;
+}
+
+.detail > input {
+    border-radius: 2px;
+    border: 1px solid #d7d7e7;
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.8);
+    padding: 0.5 rem 1rem;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}

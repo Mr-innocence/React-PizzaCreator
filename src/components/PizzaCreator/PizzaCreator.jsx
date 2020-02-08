@@ -1,23 +1,20 @@
 import React from 'react';
 import "./PizzaCreator.css";
-import Title from '../Title';
+import SubmitButton from '../SubmitButton';
+import Details from '../Details';
+import Sizes from '../Sizes';
+import Toppings from "../Toppings";
+import Summary from "../Summary";
 
 const PizzaCreator = () => (
     <div className = "pizza-creator">
-        <div className="details">
-            <Title>Enter your details</Title>
-        </div>
-        <div className="size">
-            <Title>Select your size</Title>
-        </div>
-        <div className="toppings">
-            <Title>Choose your toppings</Title>
-        </div>
-        <div className="summary">
-            <Title>Summary</Title>
-        </div>
-        <button type="submit">Place order</button>
+        <Details></Details>
+        <Sizes></Sizes>
+        <Toppings></Toppings>
+        <Summary></Summary>     
+        <SubmitButton></SubmitButton>
     </div>
+    
 )
 
 export default PizzaCreator;

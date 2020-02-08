@@ -1,0 +1,23 @@
+.sizes__container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    
+}
+.size {
+    display: grid;   
+    grid-template-columns: auto 1fr;
+    grid-gap: 20px;
+    align-items: center;
+}
+.size > img {
+    --width: 100px;
+    width: var(--width);
+    border: 5px solid silver;
+    border-radius: 50%;
+}
+.small > img {
+    width: calc(var(--width) * 0.8)
+}
+.large > img {
+    width: calc(var(--width) * 1.2)
+}
