@@ -1,0 +1,39 @@
+.topping {
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
+    background: #f2f2f2;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.topping:hover {
+    border-color: #1a98e1;
+    color: #1a98e1;
+}
+.topping--active {
+    background: #1a98e1;
+    color: white!important;
+}
+.topping > img {
+    width: 50px;
+    height: 33px;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #e6e6e6;
+}
+
+.topping__amount {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.topping__amount > button {
+    border: none
+}
+
+.topping__amount > span {
+    text-align: center;
+}
+

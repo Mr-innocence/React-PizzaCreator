@@ -11,7 +11,7 @@ const PizzaCreator = () => (
         <Details></Details>
         <Sizes></Sizes>
         <Toppings></Toppings>
-        <Summary></Summary>     
+        <Summary selectedPizza={{}} selectedToppings={[]} total="0"></Summary>     
         <SubmitButton></SubmitButton>
     </div>
     
