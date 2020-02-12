@@ -3,8 +3,20 @@ import Title from '../Title';
 import Topping from '../Topping';
 import './Toppings.css';
 
-const Toppings = () => (
-    <div className="toppings">
+class Toppings extends React.Component{
+    constructor(props){
+        super(props);
+        selectedToppings,
+        onAmountAdd,
+        onAmountMinus
+    }
+
+    render(){
+        selectedToppings = this.props;
+        onAmountAdd = this.props;
+        onAmountMinus = this.props
+        return (
+            <div className="toppings">
         <Title>Choose Your Toppings</Title>
         <div className="toppings__container">
             {[{
@@ -67,10 +79,20 @@ const Toppings = () => (
             srcImg: 'src/assets/toppings/tomato.svg',
             price: 0.99,
         }].map(({ name, srcImg }) =>(
-                <Topping key={name} name={name} srcImg={srcImg}></Topping>               
+                <Topping 
+                    key={name} 
+                    name={name} 
+                    srcImg={srcImg}
+                    selectedToppings={selectedToppings}
+                    onAmountAdd={onAmountAdd}
+                    onAmountMinus={onAmountMinus}
+                ></Topping>               
             ))}
         </div>
     </div>
-);
+
+        );
+    }
+}
 
 export default Toppings;

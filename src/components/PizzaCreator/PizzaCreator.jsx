@@ -6,15 +6,74 @@ import Sizes from '../Sizes';
 import Toppings from "../Toppings";
 import Summary from "../Summary";
 
-const PizzaCreator = () => (
-    <div className = "pizza-creator">
-        <Details></Details>
-        <Sizes></Sizes>
-        <Toppings></Toppings>
-        <Summary selectedPizza={{}} selectedToppings={[]} total="0"></Summary>     
-        <SubmitButton></SubmitButton>
-    </div>
+class PizzaCreator extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            selectedPizzas:[],
+            selectedToppings:[
+                {
+                    name: 'Bacon',
+                    amount:1
+                },
+            ]
+        }        
+    }
+
+    updateSelectedToppingAmount(name, delta){
+        const { selectedToppings } = this.state;
+        const { amount } = selectedToppings.find(({ name: selectedToppingsName}) => { name === selectedToppingsName});
+        const newAmount = amount + value;
+        return newAmount;
+    }
+
+    setSelectedToppingAmount(newAmount){
+        this.setState({
+            selectedPizzas,
+            selectedToppings:[
+                ...state,
+                {
+                    name,
+                    amount: newAmount
+                }
+            ]
+        }); 
+    }
+
+    addSelectedToppingAmount(name, value = 1){
+        const newAmount = updateSelectedToppingAmount(name, value);
+        setSelectedToppingAmount(newAmount);
+              
+    }
+
+    minusSelectedToppingAmount(name, value = -1){
+        const newAmount = updateSelectedToppingAmount(name, value);
+        setSelectedToppingAmount(newAmount);
+    }
+
     
-)
+
+    render(){
+        const { selectedPizzas, selectedToppings } = this.state;
+        return(
+            <div className = "pizza-creator">
+                <Details></Details>
+                <Sizes></Sizes>
+                <Toppings
+                    selectedToppings={selectedToppings} 
+                    onAmountAdd = {addSelectedToppingAmount}
+                    onAmountMinus = {minusSelectedToppingAmount}
+                ></Toppings>
+                <Summary 
+                    selectedPizza={selectedPizzas} 
+                    selectedToppings={selectedToppings} 
+                    total="0"
+                ></Summary>     
+                <SubmitButton></SubmitButton>
+            </div>
+
+        );
+    }
+}
 
 export default PizzaCreator;
