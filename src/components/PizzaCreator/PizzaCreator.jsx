@@ -13,8 +13,12 @@ class PizzaCreator extends React.Component{
             selectedPizzas:[],
             selectedToppings:[
                 {
-                    name: 'Bacon',
-                    amount:1
+                    name: 'bacon',
+                    amount:1,
+                },
+                {
+                    name : 'mushroom',
+                    amount:1,
                 },
             ]
         }        
@@ -23,7 +27,7 @@ class PizzaCreator extends React.Component{
     updateSelectedToppingAmount(name, delta){
         const { selectedToppings } = this.state;
         const { amount } = selectedToppings.find(({ name: selectedToppingsName}) => { name === selectedToppingsName});
-        const newAmount = amount + value;
+        const newAmount = amount + delta;
         return newAmount;
     }
 
@@ -61,8 +65,8 @@ class PizzaCreator extends React.Component{
                 <Sizes></Sizes>
                 <Toppings
                     selectedToppings={selectedToppings} 
-                    onAmountAdd = {addSelectedToppingAmount}
-                    onAmountMinus = {minusSelectedToppingAmount}
+                    onAmountAdd = {this.addSelectedToppingAmount}
+                    onAmountMinus = {this.minusSelectedToppingAmount}
                 ></Toppings>
                 <Summary 
                     selectedPizza={selectedPizzas} 

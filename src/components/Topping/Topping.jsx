@@ -4,26 +4,38 @@ import './Topping.css'
 class Topping extends React.Component{
     constructor(props) {
         super(props);
-        selectedToppings,
-        onAmountAdd,
-        onAmountMinus
+    }
+
+    getSelectedTopping(){
+        const { selectedToppings } = this.props;
+        const selectedTopping = selectedToppings.find(({name: selectedToppingName}) => {
+            selectedToppingName === name;
+        })
+        return selectedTopping;
+    }
+
+
+    getAmount(){
+        const selectedTopping = this.getSelectedTopping();
+        return selectedTopping ? selectedTopping.amount : 0;       
     }
 
     getToppingClassName(){
         let className = "topping";
-        const { amount } = this.state;
+        const { amount } = this.getAmount();
         const active = amount > 0;
 
         if(!active){
             return className;
         }
-
         return `${className} topping--active`;
     }
 
+   
+
     render(){
-        const { name, srcImg } = this.props;
-        const { amount } = this.state;
+        const { onAmountAdd, onAmountMinus, name, srcImg } = this.props;
+        debugger;
         return (
         <div 
             className={this.getToppingClassName()} 
@@ -34,12 +46,12 @@ class Topping extends React.Component{
             <div className="topping__amount">
                 <button 
                     type="button"
-                    onClick={()=>this.decreaseAmount()}
+                    onClick={() => onAmountMinus(name)}
                 >-</button>
-                <span>{amount}</span>
+                <span>{this.getAmount()}</span>
                 <button 
                     type="button"
-                    onClick={()=>this.increaseAmount()}
+                    onClick={() => onAmountAdd(name)}
                 >+</button>
             </div>
         </div>);
