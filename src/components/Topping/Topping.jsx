@@ -6,23 +6,22 @@ class Topping extends React.Component{
         super(props);
     }
 
-    getSelectedTopping(){
+    getSelectedTopping(name){
         const { selectedToppings } = this.props;
-        const selectedTopping = selectedToppings.find(({name: selectedToppingName}) => {
-            selectedToppingName === name;
-        })
+        const selectedTopping = selectedToppings.find(({ name: selectedToppingName }) => ( selectedToppingName === name));
         return selectedTopping;
     }
 
 
-    getAmount(){
-        const selectedTopping = this.getSelectedTopping();
+    getAmount(name){
+        const selectedTopping = this.getSelectedTopping(name);
         return selectedTopping ? selectedTopping.amount : 0;       
     }
 
-    getToppingClassName(){
+    getToppingClassName(name){
         let className = "topping";
-        const { amount } = this.getAmount();
+        const amount= this.getAmount(name);
+        console.log(name+ amount);
         const active = amount > 0;
 
         if(!active){
@@ -35,10 +34,9 @@ class Topping extends React.Component{
 
     render(){
         const { onAmountAdd, onAmountMinus, name, srcImg } = this.props;
-        debugger;
         return (
         <div 
-            className={this.getToppingClassName()} 
+            className={this.getToppingClassName(name)} 
             key = {name}
         >
             <img src = {srcImg}></img>
@@ -48,7 +46,7 @@ class Topping extends React.Component{
                     type="button"
                     onClick={() => onAmountMinus(name)}
                 >-</button>
-                <span>{this.getAmount()}</span>
+                <span>{this.getAmount(name)}</span>
                 <button 
                     type="button"
                     onClick={() => onAmountAdd(name)}

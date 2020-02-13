@@ -9,7 +9,7 @@ class Toppings extends React.Component{
     }
 
     render(){
-        const { selectedToppings } = this.props;
+        const { selectedToppings, onAmountAdd, onAmountMinus } = this.props;
         return (            
             <div className="toppings">
             <Title>Choose Your Toppings</Title>
@@ -73,7 +73,7 @@ class Toppings extends React.Component{
                 name : 'tomato',
                 srcImg: 'src/assets/toppings/tomato.svg',
                 price: 0.99,
-            }].map(({ name, srcImg, onAmountAdd, onAmountMinus }) =>(            
+            }].map(({ name, srcImg,}) =>(            
                     <Topping 
                         key={name} 
                         name={name} 

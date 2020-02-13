@@ -11,48 +11,41 @@ class PizzaCreator extends React.Component{
         super(props);
         this.state = {
             selectedPizzas:[],
-            selectedToppings:[
-                {
-                    name: 'bacon',
-                    amount:1,
-                },
-                {
-                    name : 'mushroom',
-                    amount:1,
-                },
-            ]
-        }        
+            selectedToppings:[]
+        } 
+        this.addSelectedToppingAmount = this.addSelectedToppingAmount.bind(this);  
+        this.minusSelectedToppingAmount = this.minusSelectedToppingAmount.bind(this);     
     }
 
     updateSelectedToppingAmount(name, delta){
         const { selectedToppings } = this.state;
-        const { amount } = selectedToppings.find(({ name: selectedToppingsName}) => { name === selectedToppingsName});
+        const amount = selectedToppings.find(({ name: selectedToppingsName}) => { name === selectedToppingsName}) ? selectedToppings.amount : 0;
         const newAmount = amount + delta;
         return newAmount;
     }
 
-    setSelectedToppingAmount(newAmount){
+    setSelectedToppingAmount(newName, newAmount){
+        const { selectedPizzas, selectedToppings } = this.state;
         this.setState({
             selectedPizzas,
-            selectedToppings:[
-                ...state,
+            selectedToppings: [
+                ...selectedToppings,
                 {
-                    name,
+                    name: newName,
                     amount: newAmount
                 }
             ]
-        }); 
+        });       
     }
 
     addSelectedToppingAmount(name, value = 1){
-        const newAmount = updateSelectedToppingAmount(name, value);
-        setSelectedToppingAmount(newAmount);
-              
+        const newAmount = this.updateSelectedToppingAmount(name, value);
+        this.setSelectedToppingAmount(name, newAmount);              
     }
 
     minusSelectedToppingAmount(name, value = -1){
-        const newAmount = updateSelectedToppingAmount(name, value);
-        setSelectedToppingAmount(newAmount);
+        const newAmount = this.updateSelectedToppingAmount(name, value);
+        this.setSelectedToppingAmount(name, newAmount);
     }
 
     
