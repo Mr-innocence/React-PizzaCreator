@@ -10,48 +10,87 @@ class PizzaCreator extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            selectedPizzas:[],
-            selectedToppings:[]
+            selectedToppings:[
+                {
+                    name: 'bacon',
+                    amount:1
+                }
+            ]
         } 
         this.addSelectedToppingAmount = this.addSelectedToppingAmount.bind(this);  
         this.minusSelectedToppingAmount = this.minusSelectedToppingAmount.bind(this);     
     }
 
-    updateSelectedToppingAmount(name, delta){
+    getSelectedTopping(name){
         const { selectedToppings } = this.state;
-        const amount = selectedToppings.find(({ name: selectedToppingsName}) => { name === selectedToppingsName}) ? selectedToppings.amount : 0;
-        const newAmount = amount + delta;
-        return newAmount;
+        const selectedTopping = selectedToppings.find(({ name: selectedToppingName}) => name === selectedToppingName);
+        return selectedTopping;
     }
 
-    setSelectedToppingAmount(newName, newAmount){
-        const { selectedPizzas, selectedToppings } = this.state;
+    getAmount(selectedTopping){
+        const amount = selectedTopping !== undefined ? selectedTopping.amount : 0;
+        return amount;
+    }
+
+    updateSelectedToppingAmount(name, delta){
+        const selectedTopping = this.getSelectedTopping(name);
+        const amount = this.getAmount(selectedTopping);
+        const newAmount = amount + delta;
+        this.getNewSelectedToppings(name, newAmount);
+        
+    }
+
+    setSelectedToppingAmount(newSelectedToppings){
         this.setState({
-            selectedPizzas,
-            selectedToppings: [
+            selectedToppings: [...newSelectedToppings],
+        });
+    }
+
+    getNewSelectedToppings(newName, newAmount){
+        let { selectedToppings } = this.state;
+        const selectedTopping = this.getSelectedTopping(newName);
+        const amount = this.getAmount(selectedTopping);
+        let newSelectedToppings;
+        if(amount === 0 && newAmount > 0){
+            newSelectedToppings=[
                 ...selectedToppings,
                 {
                     name: newName,
                     amount: newAmount
                 }
             ]
-        });       
+        }else if(amount === 0 && newAmount < 0 || amount === 1 && newAmount === 0){
+            newSelectedToppings = selectedToppings.filter((element) => 
+                element.name !== newName
+            )
+        }else
+        {
+            newSelectedToppings = selectedToppings.map((element) => {
+                if(element.name === newName){
+                    return {
+                        name: newName,
+                        amount: newAmount
+                    }
+                }
+                 return element;
+            })            
+        }
+
+        this.setSelectedToppingAmount(newSelectedToppings);  
     }
 
+
     addSelectedToppingAmount(name, value = 1){
-        const newAmount = this.updateSelectedToppingAmount(name, value);
-        this.setSelectedToppingAmount(name, newAmount);              
+        this.updateSelectedToppingAmount(name, value);           
     }
 
     minusSelectedToppingAmount(name, value = -1){
-        const newAmount = this.updateSelectedToppingAmount(name, value);
-        this.setSelectedToppingAmount(name, newAmount);
+        this.updateSelectedToppingAmount(name, value);  
     }
 
-    
 
     render(){
-        const { selectedPizzas, selectedToppings } = this.state;
+        const {selectedToppings } = this.state;
         return(
             <div className = "pizza-creator">
                 <Details></Details>
@@ -62,7 +101,6 @@ class PizzaCreator extends React.Component{
                     onAmountMinus = {this.minusSelectedToppingAmount}
                 ></Toppings>
                 <Summary 
-                    selectedPizza={selectedPizzas} 
                     selectedToppings={selectedToppings} 
                     total="0"
                 ></Summary>     
