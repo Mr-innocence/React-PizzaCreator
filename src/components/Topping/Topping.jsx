@@ -7,8 +7,7 @@ class Topping extends React.Component{
     }
 
     getSelectedTopping(name){
-        const { selectedToppings } = this.props;
-        console.log(selectedToppings);
+        const { selectedToppings }= this.props;
         const selectedTopping = selectedToppings.find(({ name: selectedToppingName }) =>  selectedToppingName === name);
         return selectedTopping;
     }

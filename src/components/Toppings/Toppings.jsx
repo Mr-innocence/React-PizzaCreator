@@ -73,7 +73,7 @@ class Toppings extends React.Component{
                 name : 'tomato',
                 srcImg: 'src/assets/toppings/tomato.svg',
                 price: 0.99,
-            }].map(({ name, srcImg,}) =>(            
+            }].map(({ name, srcImg }) =>(            
                     <Topping 
                         key={name} 
                         name={name} 

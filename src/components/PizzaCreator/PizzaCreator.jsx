@@ -14,6 +14,10 @@ class PizzaCreator extends React.Component{
                 {
                     name: 'bacon',
                     amount:1
+                },
+                {
+                    name: 'tomato',
+                    amount:2
                 }
             ]
         } 
@@ -42,38 +46,54 @@ class PizzaCreator extends React.Component{
 
     setSelectedToppingAmount(newSelectedToppings){
         this.setState({
-            selectedToppings: [...newSelectedToppings],
+            selectedToppings: newSelectedToppings,
         });
     }
 
+    addNewToppingToSelectedToppings(newName, newAmount){
+        const { selectedToppings } = this.state;
+        const newSelectedToppings=[
+            ...selectedToppings,
+            {
+                name: newName,
+                amount: newAmount
+            }
+        ];
+        return newSelectedToppings;
+    }
+
+    removeFromSelectedToppings(newName){
+        const { selectedToppings } = this.state;
+        const newSelectedToppings = selectedToppings.filter((element) => element.name !== newName);
+        return newSelectedToppings;
+    }
+
+    updateExistToppingAmount(newName, newAmount){
+        const { selectedToppings } = this.state;
+        const newSelectedToppings = selectedToppings.map((element) => {
+            if(element.name === newName){
+                return {
+                    name: newName,
+                    amount: newAmount
+                }
+            }
+             return element;
+        });
+        return newSelectedToppings;
+    }
+
     getNewSelectedToppings(newName, newAmount){
-        let { selectedToppings } = this.state;
         const selectedTopping = this.getSelectedTopping(newName);
         const amount = this.getAmount(selectedTopping);
         let newSelectedToppings;
         if(amount === 0 && newAmount > 0){
-            newSelectedToppings=[
-                ...selectedToppings,
-                {
-                    name: newName,
-                    amount: newAmount
-                }
-            ]
+            newSelectedToppings = this.addNewToppingToSelectedToppings(newName, newAmount);
+            
         }else if(amount === 0 && newAmount < 0 || amount === 1 && newAmount === 0){
-            newSelectedToppings = selectedToppings.filter((element) => 
-                element.name !== newName
-            )
+            newSelectedToppings = this.removeFromSelectedToppings(newName);
         }else
         {
-            newSelectedToppings = selectedToppings.map((element) => {
-                if(element.name === newName){
-                    return {
-                        name: newName,
-                        amount: newAmount
-                    }
-                }
-                 return element;
-            })            
+            newSelectedToppings = this.updateExistToppingAmount(newName, newAmount);                      
         }
 
         this.setSelectedToppingAmount(newSelectedToppings);  
@@ -90,7 +110,7 @@ class PizzaCreator extends React.Component{
 
 
     render(){
-        const {selectedToppings } = this.state;
+        const { selectedToppings } = this.state;
         return(
             <div className = "pizza-creator">
                 <Details></Details>
