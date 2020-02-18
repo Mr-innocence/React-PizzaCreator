@@ -10,6 +10,7 @@ class PizzaCreator extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            selectedSize:"small",
             selectedToppings:[
                 {
                     name: 'bacon',
@@ -22,7 +23,8 @@ class PizzaCreator extends React.Component{
             ]
         } 
         this.addSelectedToppingAmount = this.addSelectedToppingAmount.bind(this);  
-        this.minusSelectedToppingAmount = this.minusSelectedToppingAmount.bind(this);     
+        this.minusSelectedToppingAmount = this.minusSelectedToppingAmount.bind(this);
+        this.onChooseSize = this.onChooseSize.bind(this);     
     }
 
     getSelectedTopping(name){
@@ -44,7 +46,7 @@ class PizzaCreator extends React.Component{
         
     }
 
-    setSelectedToppingAmount(newSelectedToppings){
+    setSelectedToppings(newSelectedToppings){
         this.setState({
             selectedToppings: newSelectedToppings,
         });
@@ -96,7 +98,7 @@ class PizzaCreator extends React.Component{
             newSelectedToppings = this.updateExistToppingAmount(newName, newAmount);                      
         }
 
-        this.setSelectedToppingAmount(newSelectedToppings);  
+        this.setSelectedToppings(newSelectedToppings);  
     }
 
 
@@ -108,13 +110,31 @@ class PizzaCreator extends React.Component{
         this.updateSelectedToppingAmount(name, value);  
     }
 
+    onChooseSize(name){
+        this.getNewSelectedSize(name);
+    }
+
+    getNewSelectedSize(name){
+        const newSelectedSize = name;
+        this.setSelectedSize(newSelectedSize);
+    }
+
+    setSelectedSize(newSelectedSize){
+        this.setState({
+            selectedSize: newSelectedSize
+        })
+    }
+
 
     render(){
-        const { selectedToppings } = this.state;
+        const { selectedSize, selectedToppings } = this.state;
         return(
             <div className = "pizza-creator">
                 <Details></Details>
-                <Sizes></Sizes>
+                <Sizes
+                    selectedSize={selectedSize}
+                    onChooseSize={this.onChooseSize} 
+                ></Sizes>
                 <Toppings
                     selectedToppings={selectedToppings} 
                     onAmountAdd = {this.addSelectedToppingAmount}
