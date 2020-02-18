@@ -10,14 +10,20 @@ class PizzaCreator extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            selectedSize:"small",
+            selectedSize:
+            {
+                name: "small",
+                price: 9.99
+            },
             selectedToppings:[
                 {
                     name: 'bacon',
+                    price: 0.99,
                     amount:1
                 },
                 {
                     name: 'tomato',
+                    price: 0.99,
                     amount:2
                 }
             ]
@@ -41,8 +47,9 @@ class PizzaCreator extends React.Component{
     updateSelectedToppingAmount(name, delta){
         const selectedTopping = this.getSelectedTopping(name);
         const amount = this.getAmount(selectedTopping);
+        const { price } = selectedTopping;
         const newAmount = amount + delta;
-        this.getNewSelectedToppings(name, newAmount);
+        this.getNewSelectedToppings(name, newAmount, price);
         
     }
 
@@ -52,12 +59,13 @@ class PizzaCreator extends React.Component{
         });
     }
 
-    addNewToppingToSelectedToppings(newName, newAmount){
+    addNewToppingToSelectedToppings(newName, newAmount, price){
         const { selectedToppings } = this.state;
         const newSelectedToppings=[
             ...selectedToppings,
             {
                 name: newName,
+                price: price,
                 amount: newAmount
             }
         ];
@@ -84,12 +92,12 @@ class PizzaCreator extends React.Component{
         return newSelectedToppings;
     }
 
-    getNewSelectedToppings(newName, newAmount){
+    getNewSelectedToppings(newName, newAmount, price){
         const selectedTopping = this.getSelectedTopping(newName);
         const amount = this.getAmount(selectedTopping);
         let newSelectedToppings;
         if(amount === 0 && newAmount > 0){
-            newSelectedToppings = this.addNewToppingToSelectedToppings(newName, newAmount);
+            newSelectedToppings = this.addNewToppingToSelectedToppings(newName, newAmount, price);
             
         }else if(amount === 0 && newAmount < 0 || amount === 1 && newAmount === 0){
             newSelectedToppings = this.removeFromSelectedToppings(newName);
@@ -110,12 +118,16 @@ class PizzaCreator extends React.Component{
         this.updateSelectedToppingAmount(name, value);  
     }
 
-    onChooseSize(name){
-        this.getNewSelectedSize(name);
+    onChooseSize(name, price){
+        this.getNewSelectedSize(name, price);
     }
 
-    getNewSelectedSize(name){
-        const newSelectedSize = name;
+    getNewSelectedSize(name, price){
+        const newSelectedSize = {
+            name: name,
+            price: price
+
+        };
         this.setSelectedSize(newSelectedSize);
     }
 
@@ -142,6 +154,7 @@ class PizzaCreator extends React.Component{
                 ></Toppings>
                 <Summary 
                     selectedToppings={selectedToppings} 
+                    selectedSize={selectedSize}
                     total="0"
                 ></Summary>     
                 <SubmitButton></SubmitButton>

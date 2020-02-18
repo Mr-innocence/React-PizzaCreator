@@ -23,7 +23,7 @@ class Size extends React.Component{
             <div 
                 className = {this.getSizeClassName(name, selectedSize)}
                 key={name} 
-                onClick = {() => onChooseSize(name)}
+                onClick = {() => onChooseSize(name, price)}
             >
                 <img src = 'src/assets/size.png' />
                 <div className="sizeDescription">
