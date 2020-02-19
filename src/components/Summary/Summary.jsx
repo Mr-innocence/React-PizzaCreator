@@ -2,32 +2,37 @@ import React from 'react';
 import Title from '../Title';
 import "./Summary.css"
 
-const Summary = ({
-    selectedToppings,
-    total,
-    selectedSize
-}) => (
-    const { name, price} = selectedSize;
-    <div className="summary">
-        <Title>Summary</Title>
-        <ul className="items">
-            <li className="item">
-                <span className="item__name">Pizza ({name})</span>
-                <span className="item__price">{price}</span>
-            </li>
-            {selectedToppings.map(({ name, price, amount }) => (
-                <li className="item" key={name}>
-                    <span className="item__name">{name} * {amount}</span>
-                    <span className="item__price">${price}</span>
-                </li>
-            ))}
-        </ul>
-        <hr></hr>
-        <p className="total">
-            <span>Total :</span>
-            <span>${total}</span>
-        </p>
-    </div>
-);
+class Summary extends React.Component{
+    constructor(props){
+        super(props);
+    }
+
+    render(){        
+        const { selectedSize, selectedToppings, getTotal } = this.props;
+        const { name: sizeName, price: sizePrice } = selectedSize;
+        return(        
+            <div className="summary">
+                <Title>Summary</Title>
+                <ul className="items">
+                    <li className="item">
+                        <span className="item__name">Pizza ({sizeName})</span>
+                        <span className="item__price">{sizePrice}</span>
+                    </li>
+                    {selectedToppings.map(({ name, price, amount }) => (
+                        <li className="item" key={name}>
+                            <span className="item__name">{name}*{amount}</span>
+                            <span className="item__price">${price*amount}</span>
+                        </li>
+                    ))}
+                </ul>
+                <hr></hr>
+                <p className="total">
+                    <span>Total :</span>
+                    <span>${getTotal}</span>
+                </p>
+            </div>
+        );
+    }
+}
 
 export default Summary;

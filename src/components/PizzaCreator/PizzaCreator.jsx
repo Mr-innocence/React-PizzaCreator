@@ -10,6 +10,66 @@ class PizzaCreator extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            toppings:[{
+                name : 'anchovy',
+                srcImg: 'src/assets/toppings/anchovy.svg',
+                price:2
+            },
+            {
+                name : 'bacon',
+                srcImg: 'src/assets/toppings/bacon.svg',
+                price:2
+            },
+            {
+                name : 'basil',
+                srcImg: 'src/assets/toppings/basil.svg',
+                price:2
+            },
+            {
+                name : 'chili',
+                srcImg: 'src/assets/toppings/chili.svg',
+                price:2
+            },
+            {
+                name : 'mozzarella',
+                srcImg: 'src/assets/toppings/mozzarella.svg',
+                price:2
+            },
+            {
+                name : 'mushroom',
+                srcImg: 'src/assets/toppings/mushroom.svg',
+                price:2
+            },
+            {
+                name : 'olive',
+                srcImg: 'src/assets/toppings/olive.svg',
+                price:2
+            },
+            {
+                name : 'onion',
+                srcImg: 'src/assets/toppings/onion.svg',
+                price:2
+            },
+            {
+                name : 'pepper',
+                srcImg: 'src/assets/toppings/pepper.svg',
+                price:2
+            },
+            {
+                name : 'pepperoni',
+                srcImg: 'src/assets/toppings/pepperoni.svg',
+                price:2
+            },
+            {
+                name : 'sweetcorn',
+                srcImg: 'src/assets/toppings/sweetcorn.svg',
+                price:2
+            },
+            {
+                name : 'tomato',
+                srcImg: 'src/assets/toppings/tomato.svg',
+                price:2
+            }],
             selectedSize:
             {
                 name: "small",
@@ -18,12 +78,12 @@ class PizzaCreator extends React.Component{
             selectedToppings:[
                 {
                     name: 'bacon',
-                    price: 0.99,
+                    price: 2,
                     amount:1
                 },
                 {
                     name: 'tomato',
-                    price: 0.99,
+                    price: 2,
                     amount:2
                 }
             ]
@@ -44,13 +104,18 @@ class PizzaCreator extends React.Component{
         return amount;
     }
 
+    getPrice(name){
+        const { toppings } = this.state;
+        const { price } = toppings.find(({ name: toppingName}) => toppingName === name);
+        return price;
+    }
+
     updateSelectedToppingAmount(name, delta){
         const selectedTopping = this.getSelectedTopping(name);
         const amount = this.getAmount(selectedTopping);
-        const { price } = selectedTopping;
+        const price = this.getPrice(name);
         const newAmount = amount + delta;
-        this.getNewSelectedToppings(name, newAmount, price);
-        
+        this.getNewSelectedToppings(name, newAmount, price);       
     }
 
     setSelectedToppings(newSelectedToppings){
@@ -82,8 +147,10 @@ class PizzaCreator extends React.Component{
         const { selectedToppings } = this.state;
         const newSelectedToppings = selectedToppings.map((element) => {
             if(element.name === newName){
+                const { name, price } = element;
                 return {
-                    name: newName,
+                    name,
+                    price,
                     amount: newAmount
                 }
             }
@@ -126,7 +193,6 @@ class PizzaCreator extends React.Component{
         const newSelectedSize = {
             name: name,
             price: price
-
         };
         this.setSelectedSize(newSelectedSize);
     }
@@ -137,9 +203,13 @@ class PizzaCreator extends React.Component{
         })
     }
 
+    getTotal(){
+        
+    }
+
 
     render(){
-        const { selectedSize, selectedToppings } = this.state;
+        const { toppings, selectedSize, selectedToppings } = this.state;
         return(
             <div className = "pizza-creator">
                 <Details></Details>
@@ -148,6 +218,7 @@ class PizzaCreator extends React.Component{
                     onChooseSize={this.onChooseSize} 
                 ></Sizes>
                 <Toppings
+                    toppings={toppings}
                     selectedToppings={selectedToppings} 
                     onAmountAdd = {this.addSelectedToppingAmount}
                     onAmountMinus = {this.minusSelectedToppingAmount}
@@ -155,7 +226,7 @@ class PizzaCreator extends React.Component{
                 <Summary 
                     selectedToppings={selectedToppings} 
                     selectedSize={selectedSize}
-                    total="0"
+                    total={this.getTotal}
                 ></Summary>     
                 <SubmitButton></SubmitButton>
             </div>
