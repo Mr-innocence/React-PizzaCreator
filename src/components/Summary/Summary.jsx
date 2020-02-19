@@ -16,7 +16,7 @@ class Summary extends React.Component{
                 <ul className="items">
                     <li className="item">
                         <span className="item__name">Pizza ({sizeName})</span>
-                        <span className="item__price">{sizePrice}</span>
+                        <span className="item__price">${sizePrice}</span>
                     </li>
                     {selectedToppings.map(({ name, price, amount }) => (
                         <li className="item" key={name}>
@@ -26,9 +26,9 @@ class Summary extends React.Component{
                     ))}
                 </ul>
                 <hr></hr>
-                <p className="total">
+                <p className="item">
                     <span>Total :</span>
-                    <span>${getTotal}</span>
+                    <span>${getTotal().toFixed(2)}</span>
                 </p>
             </div>
         );

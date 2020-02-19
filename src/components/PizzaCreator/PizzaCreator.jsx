@@ -10,66 +10,6 @@ class PizzaCreator extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            toppings:[{
-                name : 'anchovy',
-                srcImg: 'src/assets/toppings/anchovy.svg',
-                price:2
-            },
-            {
-                name : 'bacon',
-                srcImg: 'src/assets/toppings/bacon.svg',
-                price:2
-            },
-            {
-                name : 'basil',
-                srcImg: 'src/assets/toppings/basil.svg',
-                price:2
-            },
-            {
-                name : 'chili',
-                srcImg: 'src/assets/toppings/chili.svg',
-                price:2
-            },
-            {
-                name : 'mozzarella',
-                srcImg: 'src/assets/toppings/mozzarella.svg',
-                price:2
-            },
-            {
-                name : 'mushroom',
-                srcImg: 'src/assets/toppings/mushroom.svg',
-                price:2
-            },
-            {
-                name : 'olive',
-                srcImg: 'src/assets/toppings/olive.svg',
-                price:2
-            },
-            {
-                name : 'onion',
-                srcImg: 'src/assets/toppings/onion.svg',
-                price:2
-            },
-            {
-                name : 'pepper',
-                srcImg: 'src/assets/toppings/pepper.svg',
-                price:2
-            },
-            {
-                name : 'pepperoni',
-                srcImg: 'src/assets/toppings/pepperoni.svg',
-                price:2
-            },
-            {
-                name : 'sweetcorn',
-                srcImg: 'src/assets/toppings/sweetcorn.svg',
-                price:2
-            },
-            {
-                name : 'tomato',
-                srcImg: 'src/assets/toppings/tomato.svg',
-                price:2
-            }],
             selectedSize:
             {
                 name: "small",
@@ -91,6 +31,7 @@ class PizzaCreator extends React.Component{
         this.addSelectedToppingAmount = this.addSelectedToppingAmount.bind(this);  
         this.minusSelectedToppingAmount = this.minusSelectedToppingAmount.bind(this);
         this.onChooseSize = this.onChooseSize.bind(this);     
+        this.getTotal = this.getTotal.bind(this);
     }
 
     getSelectedTopping(name){
@@ -110,10 +51,9 @@ class PizzaCreator extends React.Component{
         return price;
     }
 
-    updateSelectedToppingAmount(name, delta){
+    updateSelectedToppingAmount(name, price, delta){
         const selectedTopping = this.getSelectedTopping(name);
         const amount = this.getAmount(selectedTopping);
-        const price = this.getPrice(name);
         const newAmount = amount + delta;
         this.getNewSelectedToppings(name, newAmount, price);       
     }
@@ -177,12 +117,12 @@ class PizzaCreator extends React.Component{
     }
 
 
-    addSelectedToppingAmount(name, value = 1){
-        this.updateSelectedToppingAmount(name, value);           
+    addSelectedToppingAmount(name, price, value = 1){
+        this.updateSelectedToppingAmount(name, price,value);           
     }
 
-    minusSelectedToppingAmount(name, value = -1){
-        this.updateSelectedToppingAmount(name, value);  
+    minusSelectedToppingAmount(name, price, value = -1){
+        this.updateSelectedToppingAmount(name, price, value);  
     }
 
     onChooseSize(name, price){
@@ -204,7 +144,14 @@ class PizzaCreator extends React.Component{
     }
 
     getTotal(){
-        
+        console.log("total");
+        let total = 0;
+        const { selectedSize, selectedToppings } = this.state;
+        const { price : pizzaTotalPrice } = selectedSize;
+        let toppingTotalPrice = 0;
+        selectedToppings.forEach(({ price: toppingPrice, amount: toppingAmount}) => toppingTotalPrice += toppingPrice * toppingAmount );
+        total = pizzaTotalPrice + toppingTotalPrice;
+        return total;       
     }
 
 
@@ -226,7 +173,7 @@ class PizzaCreator extends React.Component{
                 <Summary 
                     selectedToppings={selectedToppings} 
                     selectedSize={selectedSize}
-                    total={this.getTotal}
+                    getTotal={this.getTotal}
                 ></Summary>     
                 <SubmitButton></SubmitButton>
             </div>
