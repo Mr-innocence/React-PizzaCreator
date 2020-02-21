@@ -26,12 +26,36 @@ class PizzaCreator extends React.Component{
                     price: 2,
                     amount:2
                 }
-            ]
+            ],
+            details: {
+                name:'Bella',
+                email:'',
+                confirmEmail:'',
+                address:'',
+                postcode:'',
+                contactNumber:'',
+            }
         } 
         this.addSelectedToppingAmount = this.addSelectedToppingAmount.bind(this);  
         this.minusSelectedToppingAmount = this.minusSelectedToppingAmount.bind(this);
         this.onChooseSize = this.onChooseSize.bind(this);     
         this.getTotal = this.getTotal.bind(this);
+        this.setDetails = this.setDetails.bind(this);
+        this.submitOrder = this.submitOrder.bind(this);
+    }
+
+    setDetails(key, value){
+        const { details } = this.state;
+        const newDetails = {
+            ...details,
+            [key]: value
+        }
+
+        this.setState({
+            details: newDetails
+        }
+        );
+            
     }
 
     getSelectedTopping(name){
@@ -153,12 +177,22 @@ class PizzaCreator extends React.Component{
         return total;       
     }
 
+    submitOrder(){
+        const { selectedSize, selectedToppings, details } = this.state;
+        console.log(selectedSize);
+        console.log(selectedToppings);
+        console.log(details);
+    }
+
 
     render(){
-        const { toppings, selectedSize, selectedToppings } = this.state;
+        const { toppings, selectedSize, selectedToppings, details } = this.state;
         return(
             <div className = "pizza-creator">
-                <Details></Details>
+                <Details
+                    details={details}
+                    onChange={this.setDetails}
+                ></Details>
                 <Sizes
                     selectedSize={selectedSize}
                     onChooseSize={this.onChooseSize} 
@@ -174,7 +208,9 @@ class PizzaCreator extends React.Component{
                     selectedSize={selectedSize}
                     getTotal={this.getTotal}
                 ></Summary>     
-                <SubmitButton></SubmitButton>
+                <SubmitButton
+                    submitOrder={this.submitOrder}
+                ></SubmitButton>
             </div>
 
         );
