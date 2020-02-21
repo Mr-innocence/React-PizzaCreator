@@ -144,7 +144,6 @@ class PizzaCreator extends React.Component{
     }
 
     getTotal(){
-        console.log("total");
         let total = 0;
         const { selectedSize, selectedToppings } = this.state;
         const { price : pizzaTotalPrice } = selectedSize;
