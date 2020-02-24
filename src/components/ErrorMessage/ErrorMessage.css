@@ -1,0 +1,15 @@
+.message--error{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 0.5rem;
+    position:fixed;
+    left:50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5;
+    box-shadow: 0 0 0.25rem 1px black;
+}
+
+.message--error > img {
+    height: 1rem
+}

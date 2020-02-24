@@ -1,5 +1,6 @@
 import React from 'react';
 import './Size.css'
+import size from '../../assets/size.png'
 
 class Size extends React.Component{
     constructor(props){
@@ -8,7 +9,8 @@ class Size extends React.Component{
 
     getSizeClassName(name, selectedSize){
         let className = `size size--${name}`;
-        const active = selectedSize === name;
+        const { name: selectedSizeName } = selectedSize;
+        const active = selectedSizeName === name;
         if(active){
             className = `size size--${name} size--active`;
         }
@@ -25,7 +27,7 @@ class Size extends React.Component{
                 key={name} 
                 onClick = {() => onChooseSize(name, price)}
             >
-                <img src = 'src/assets/size.png' />
+                <img src = {size} />
                 <div className="sizeDescription">
                     <div>
                         {name}

@@ -1,0 +1,30 @@
+.detail--error{
+    display: grid;
+    color: red;
+    box-sizing: border-box;
+    
+}
+
+.detail--error > input{
+    box-sizing: border-box;
+    grid-column: span 2;
+    border-radius: 2px;
+    border: 1px solid red;
+    font-size: 1.2rem;
+    outline: none;
+    width: 100%;
+
+}
+
+.detail--error > label{
+    text-transform: uppercase;
+    font-size:small;
+    font-weight: bold;
+}
+
+
+.detail--error > span{
+    justify-self: end;
+    font-size: 0.8rem;
+    padding: 0;
+}

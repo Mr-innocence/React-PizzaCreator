@@ -8,14 +8,11 @@ class Details extends React.Component{
         super(props);
     }
 
-
-
     render(){
         const{ details, onChange } = this.props;
         return(
             <section className = "details">
                 <Title>Enter your details</Title>
-                <button type="button" onClick = {() => console.log(details)}>show details</button>
                 <div className = "details__container">
                     {[
                         {

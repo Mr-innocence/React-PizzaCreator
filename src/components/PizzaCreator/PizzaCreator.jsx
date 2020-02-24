@@ -3,30 +3,21 @@ import "./PizzaCreator.css";
 import SubmitButton from '../SubmitButton';
 import Details from '../Details';
 import Sizes from '../Sizes';
-import Toppings from "../Toppings";
-import Summary from "../Summary";
+import Toppings from '../Toppings';
+import Summary from '../Summary';
+import ErrorMessage from '../ErrorMessage';
 
 class PizzaCreator extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            atLeastOneTopping: true,
             selectedSize:
             {
                 name: "small",
                 price: 9.99
             },
-            selectedToppings:[
-                {
-                    name: 'bacon',
-                    price: 2,
-                    amount:1
-                },
-                {
-                    name: 'tomato',
-                    price: 2,
-                    amount:2
-                }
-            ],
+            selectedToppings:[],
             details: {
                 name:'Bella',
                 email:'',
@@ -177,18 +168,37 @@ class PizzaCreator extends React.Component{
         return total;       
     }
 
+
+    setAtLeastOneTopping(newAtLeastOneTopping){
+        this.setState({
+            atLeastOneTopping:newAtLeastOneTopping,
+        })
+    }
+
     submitOrder(){
         const { selectedSize, selectedToppings, details } = this.state;
+        if(!selectedToppings.length){
+            this.setAtLeastOneTopping(true);
+            setTimeout(() => {
+                this.setAtLeastOneTopping(false);
+            },1000);
+            return;           
+        }   
+
         console.log(selectedSize);
-        console.log(selectedToppings);
+        console.table(selectedToppings);
         console.log(details);
     }
 
 
     render(){
-        const { toppings, selectedSize, selectedToppings, details } = this.state;
+        const { toppings, selectedSize, selectedToppings, details, atLeastOneTopping } = this.state;
         return(
             <div className = "pizza-creator">
+                {!atLeastOneTopping && <ErrorMessage
+                    content="Please select at least one topping"
+                ></ErrorMessage>}
+                
                 <Details
                     details={details}
                     onChange={this.setDetails}
