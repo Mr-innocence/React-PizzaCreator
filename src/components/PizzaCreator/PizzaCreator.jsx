@@ -176,18 +176,21 @@ class PizzaCreator extends React.Component{
     }
 
     submitOrder(){
-        const { selectedSize, selectedToppings, details } = this.state;
-        if(!selectedToppings.length){
+        const { selectedSize, selectedToppings, details, atLeastOneTopping } = this.state;
+        if(selectedToppings.length>0){
             this.setAtLeastOneTopping(true);
+            console.log(selectedSize);
+            console.table(selectedToppings);
+            console.log(details);  
+                             
+        }else{
+            
+            this.setAtLeastOneTopping(false);
             setTimeout(() => {
-                this.setAtLeastOneTopping(false);
-            },1000);
-            return;           
+                this.setAtLeastOneTopping(true);
+            },3000);  
         }   
-
-        console.log(selectedSize);
-        console.table(selectedToppings);
-        console.log(details);
+        
     }
 
 
