@@ -35,6 +35,7 @@ class Topping extends React.Component{
         const { onAmountAdd, onAmountMinus, name, price, srcImg } = this.props;
         return (
         <div 
+            data-testid="topping"
             className={this.getToppingClassName(name)} 
             key = {name}
         >
