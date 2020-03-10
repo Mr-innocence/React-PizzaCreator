@@ -40,7 +40,7 @@ class Topping extends React.Component{
             key = {name}
         >
             <img src = {srcImg}></img>
-            <span>{name}</span>
+            <span data-testid="topping-name">{name}</span>
             <div className="topping__amount">
                 <button 
                     type="button"

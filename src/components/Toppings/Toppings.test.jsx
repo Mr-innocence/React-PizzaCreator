@@ -1,9 +1,14 @@
+import React from 'react';
 import Toppings from './Toppings';
 import { render, cleanup } from '@testing-library/react';
 
-test('render all toppings',() => {
-    const queries = render(<Toppings />);
+afterEach(() =>{
+    cleanup();
+})
+
+test('render toppings',() => {
+    const queries = render(<Toppings selectedToppings={[]} />);
     const { getAllByTestId } = queries;
 
-    expect(getAllByTestId().length).toBe(12);
+    expect(getAllByTestId('topping').length).toBe(12);
 })
