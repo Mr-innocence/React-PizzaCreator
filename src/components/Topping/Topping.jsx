@@ -39,7 +39,7 @@ class Topping extends React.Component{
             className={this.getToppingClassName(name)} 
             key = {name}
         >
-            <img src = {srcImg}></img>
+            <img src={srcImg}></img>
             <span data-testid="topping-name">{name}</span>
             <div className="topping__amount">
                 <button 

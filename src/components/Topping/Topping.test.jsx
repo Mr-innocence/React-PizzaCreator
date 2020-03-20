@@ -1,18 +1,17 @@
 import React from 'react';
 import Topping from './Topping';
 import { render, cleanup } from '@testing-library/react';
-import { TestScheduler } from 'jest';
 
-afterAll(cleanup);
+afterEach(() => cleanup());
 
 describe('render topping', () => {
     const name = 'pepper';
     const price = 0.99;
     const srcImg = './src/assets/toppings/pepperoni.svg';
 
-    let getAllByTestId;
+    let getByTestId;
     beforeAll(() => {
-        ( { getAllByTestId }= render(<Topping
+        ( { getByTestId }= render(<Topping
         name={name} 
         srcImg={srcImg}
         price={price}
@@ -23,8 +22,8 @@ describe('render topping', () => {
     })
 
     test('render name', () => {
-        expect(getAllByTestId('topping-name').textContent).toBe(name);
-    })
+        expect(getByTestId('topping-name').textContent).toBe(name);
+    });
 })
 
 
