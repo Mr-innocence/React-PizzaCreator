@@ -224,6 +224,7 @@ class PizzaCreator extends React.Component{
                 <SubmitButton
                     submitOrder={this.submitOrder}
                 ></SubmitButton>
+                <p>hello world</p>
             </div>
 
         );

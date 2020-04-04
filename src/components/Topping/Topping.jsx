@@ -39,16 +39,22 @@ class Topping extends React.Component{
             className={this.getToppingClassName(name)} 
             key = {name}
         >
-            <img src={srcImg}></img>
+            <img 
+                data-testid="topping-srcImg"
+                alt={name}
+                src={srcImg}
+            ></img>
             <span data-testid="topping-name">{name}</span>
             <div className="topping__amount">
                 <button 
                     type="button"
+                    data-testid="topping-AmountMinus"
                     onClick={() => onAmountMinus(name, price)}
                 >-</button>
-                <span>{this.getAmount(name)}</span>
+                <span data-testid="topping-amount">{this.getAmount(name)}</span>
                 <button 
                     type="button"
+                    data-testid="topping-AmountAdd"
                     onClick={() => onAmountAdd(name, price)}
                 >+</button>
             </div>
