@@ -158,15 +158,7 @@ class PizzaCreator extends React.Component{
         })
     }
 
-    getTotal(){
-        let total = 0;
-        const { selectedSize, selectedToppings } = this.state;
-        const { price : pizzaTotalPrice } = selectedSize;
-        let toppingTotalPrice = 0;
-        selectedToppings.forEach(({ price: toppingPrice, amount: toppingAmount}) => toppingTotalPrice += toppingPrice * toppingAmount );
-        total = pizzaTotalPrice + toppingTotalPrice;
-        return total;       
-    }
+
 
 
     setAtLeastOneTopping(newAtLeastOneTopping){
@@ -183,8 +175,7 @@ class PizzaCreator extends React.Component{
             console.table(selectedToppings);
             console.log(details);  
                              
-        }else{
-            
+        }else{           
             this.setAtLeastOneTopping(false);
             setTimeout(() => {
                 this.setAtLeastOneTopping(true);
@@ -219,7 +210,6 @@ class PizzaCreator extends React.Component{
                 <Summary 
                     selectedToppings={selectedToppings} 
                     selectedSize={selectedSize}
-                    getTotal={this.getTotal}
                 ></Summary>     
                 <SubmitButton
                     submitOrder={this.submitOrder}
