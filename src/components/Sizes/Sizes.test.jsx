@@ -13,7 +13,7 @@ describe("Sizes", () =>{
     test("render sizes", () =>{
         const { getAllByTestId } = render(
             <Sizes
-                    selectedSize={selectedSize}
+                selectedSize={selectedSize}
             ></Sizes>
         );
 

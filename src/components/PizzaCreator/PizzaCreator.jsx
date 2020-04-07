@@ -29,7 +29,7 @@ class PizzaCreator extends React.Component{
         } 
         this.addSelectedToppingAmount = this.addSelectedToppingAmount.bind(this);  
         this.minusSelectedToppingAmount = this.minusSelectedToppingAmount.bind(this);
-        this.onChooseSize = this.onChooseSize.bind(this);     
+        this.chooseSize = this.chooseSize.bind(this);     
         this.getTotal = this.getTotal.bind(this);
         this.setDetails = this.setDetails.bind(this);
         this.submitOrder = this.submitOrder.bind(this);
@@ -140,7 +140,7 @@ class PizzaCreator extends React.Component{
         this.updateSelectedToppingAmount(name, price, value);  
     }
 
-    onChooseSize(name, price){
+    chooseSize(name, price){
         this.getNewSelectedSize(name, price);
     }
 
@@ -199,7 +199,7 @@ class PizzaCreator extends React.Component{
                 ></Details>
                 <Sizes
                     selectedSize={selectedSize}
-                    onChooseSize={this.onChooseSize} 
+                    chooseSize={this.chooseSize} 
                 ></Sizes>
                 <Toppings
                     toppings={toppings}

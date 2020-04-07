@@ -20,20 +20,20 @@ class Size extends React.Component{
 
 
     render(){
-        const { name, price, selectedSize, onChooseSize } = this.props;
+        const { name, price, selectedSize, chooseSize } = this.props;
         return(
             <div 
                 data-testid="size"
                 className = {this.getSizeClassName(name, selectedSize)}
                 key={name} 
-                onClick = {() => onChooseSize(name, price)}
+                onClick = {() => chooseSize(name, price)}
             >
                 <img src = {size} />
                 <div className="sizeDescription">
-                    <div>
+                    <div data-testid="sizeName">
                         {name}
                     </div>
-                    <div>
+                    <div data-testid="sizePrice">
                         ${price}
                     </div>
                 </div>

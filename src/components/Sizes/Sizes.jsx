@@ -9,7 +9,7 @@ class Sizes extends React.Component{
     }
 
     render(){
-        const { onChooseSize, selectedSize } = this.props;
+        const { chooseSize, selectedSize } = this.props;
         return (
         <div className = "sizes">
             <Title>Choose Your Pizzas</Title>
@@ -31,7 +31,7 @@ class Sizes extends React.Component{
                         name={name} 
                         price={price} 
                         key={name}
-                        onChooseSize={onChooseSize} 
+                        chooseSize={chooseSize} 
                         selectedSize={selectedSize}
                     />            
                 ))}
