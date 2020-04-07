@@ -23,6 +23,7 @@ class Size extends React.Component{
         const { name, price, selectedSize, onChooseSize } = this.props;
         return(
             <div 
+                data-testid="size"
                 className = {this.getSizeClassName(name, selectedSize)}
                 key={name} 
                 onClick = {() => onChooseSize(name, price)}

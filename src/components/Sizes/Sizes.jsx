@@ -27,6 +27,7 @@ class Sizes extends React.Component{
                     }
                 ].map(({ name, price }) => (
                     <Size 
+                        
                         name={name} 
                         price={price} 
                         key={name}
